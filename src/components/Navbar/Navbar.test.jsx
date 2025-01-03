@@ -5,6 +5,9 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 import Navbar from './Navbar';
+import App from '../../App';
+
+
 
 describe('Navbar component', () => {
   const renderWithRouter = (props = {}) =>
@@ -32,20 +35,55 @@ describe('Navbar component', () => {
   });
 });
 
-describe('Home link behavior', () => {
-  it('should call onClick handler when clicked', async () => {
-    const handleClick = vi.fn();
 
+describe('Navbar interaction', () => {
+  const handleClick = vi.fn();
+
+  const renderNavbar = () => {
     render(
       <MemoryRouter>
         <Navbar onClick={handleClick} />
       </MemoryRouter>
     );
+  };
+
+  it('should call onClick handler when clicked', async () => {
+    renderNavbar();
     const homeLink = screen.getByRole('link', { name: 'Home' });
     const user = userEvent.setup();
 
     await user.click(homeLink);
 
     expect(handleClick).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe('App Navigation', () => {
+  const renderApp = () => {
+    render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>
+    );
+  };
+
+  it('should navigate to home page upon click', async () => {
+    renderApp();
+    const homeLink = screen.getByRole('link', { name: 'Home' });
+    const user = userEvent.setup();
+
+    await user.click(homeLink);
+
+    expect(screen.getByText(/welcome/i)).toBeInTheDocument();
+  });
+ 
+  it('should navigate to cart page upon click', async () => {
+    renderApp();
+    const cartLink = screen.getByRole('link', { name: 'Cart' });
+    const user = userEvent.setup();
+
+    await user.click(cartLink);
+
+    expect(screen.getByText(/your cart/i)).toBeInTheDocument();
   });
 });
