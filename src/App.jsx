@@ -2,7 +2,6 @@ import style from './App.module.css';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
-import Navbar from './components/Navbar/Navbar';
 
 function App() {
   console.log('App rendered');

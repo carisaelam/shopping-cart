@@ -1,5 +1,6 @@
 import style from './Navbar.module.css';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 export default function Navbar({ onClick }) {
   console.log('✅ Navbar rendered');
@@ -33,3 +34,7 @@ export default function Navbar({ onClick }) {
     </nav>
   );
 }
+
+Navbar.propTypes = {
+  onClick: PropTypes.func,
+};
