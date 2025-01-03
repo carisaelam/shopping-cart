@@ -8,7 +8,7 @@ import Navbar from './Navbar';
 import App from '../../App';
 
 
-
+// Component rendering
 describe('Navbar component', () => {
   const renderWithRouter = (props = {}) =>
     render(
@@ -35,7 +35,7 @@ describe('Navbar component', () => {
   });
 });
 
-
+// Click interactions
 describe('Navbar interaction', () => {
   const handleClick = vi.fn();
 
@@ -58,6 +58,7 @@ describe('Navbar interaction', () => {
   });
 });
 
+// Navigation
 describe('App Navigation', () => {
   const renderApp = () => {
     render(
