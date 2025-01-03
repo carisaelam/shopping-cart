@@ -1,7 +1,12 @@
-import './App.css';
+import style from './App.module.css';
+import Navbar from './components/Navbar/Navbar';
 
 function App() {
-  return <h1>Our First Test</h1>;
+  return (
+    <div className={style.app__container}>
+      <Navbar />
+    </div>
+  );
 }
 
 export default App;

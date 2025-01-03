@@ -1,0 +1,5 @@
+.app__container {
+  background-color: pink;
+  display: grid;
+  place-content: center;
+}
