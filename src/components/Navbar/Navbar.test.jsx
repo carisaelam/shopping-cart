@@ -36,13 +36,33 @@ describe('Navbar component', () => {
   it('should have the correct href for home link', () => {
     renderWithRouter();
     const homeLink = screen.getByRole('link', { name: 'Home' });
-    expect(homeLink).toHaveAttribute('href', '/')
+    expect(homeLink).toHaveAttribute('href', '/');
   });
 
   it('should have the correct href for cart link', () => {
     renderWithRouter();
     const cartLink = screen.getByRole('link', { name: 'Cart' });
-    expect(cartLink).toHaveAttribute('href', '/cart')
+    expect(cartLink).toHaveAttribute('href', '/cart');
+  });
+
+  it('should highlight the active link when on the home page', async () => {
+    renderWithRouter();
+    const homeLink = screen.getByRole('link', { name: 'Home' });
+    const cartLink = screen.getByRole('link', { name: 'Cart' });
+    const user = userEvent.setup();
+    await user.click(homeLink);
+
+    expect(homeLink.className).toMatch(/active/);
+    expect(cartLink.className).not.toMatch(/active/);
+  });
+
+  it('should highlight the active link when on the home page', async () => {
+    renderWithRouter();
+    const homeLink = screen.getByRole('link', { name: 'Home' });
+    const user = userEvent.setup();
+    await user.click(homeLink);
+
+    expect(homeLink.className).toMatch(/active/);
   });
 });
 

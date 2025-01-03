@@ -40,3 +40,7 @@
   transform: scale(1.01);
   transition: 0.2s;
 }
+
+.active {
+  background-color: red;
+}
