@@ -7,7 +7,6 @@ import { MemoryRouter } from 'react-router-dom';
 import Navbar from './Navbar';
 import App from '../../App';
 
-
 // Component rendering
 describe('Navbar component', () => {
   const renderWithRouter = (props = {}) =>
@@ -32,6 +31,18 @@ describe('Navbar component', () => {
     renderWithRouter();
     const cartLink = screen.getByRole('link', { name: 'Cart' });
     expect(cartLink).toBeInTheDocument();
+  });
+
+  it('should have the correct href for home link', () => {
+    renderWithRouter();
+    const homeLink = screen.getByRole('link', { name: 'Home' });
+    expect(homeLink).toHaveAttribute('href', '/')
+  });
+
+  it('should have the correct href for cart link', () => {
+    renderWithRouter();
+    const cartLink = screen.getByRole('link', { name: 'Cart' });
+    expect(cartLink).toHaveAttribute('href', '/cart')
   });
 });
 
@@ -77,7 +88,7 @@ describe('App Navigation', () => {
 
     expect(screen.getByText(/welcome/i)).toBeInTheDocument();
   });
- 
+
   it('should navigate to cart page upon click', async () => {
     renderApp();
     const cartLink = screen.getByRole('link', { name: 'Cart' });
