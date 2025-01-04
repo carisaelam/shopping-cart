@@ -1,0 +1,54 @@
+import { describe, it, expect } from 'vitest';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
+import { Routes, Route, MemoryRouter } from 'react-router-dom';
+import App from './App';
+import Cart from './pages/Cart';
+import Home from './pages/Home';
+
+// App Navigation
+describe('App Navigation', () => {
+  const renderApp = () => {
+    render(
+      <MemoryRouter initialEntries={['/']}>
+        {' '}
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="cart" element={<Cart />} />
+          </Route>
+        </Routes>
+      </MemoryRouter>
+    );
+  };
+  it('renders the app with navigation', () => {
+    renderApp();
+    expect(screen.getByText('Store')).toBeInTheDocument();
+    const homeLink = screen.getByRole('link', { name: 'Home' });
+    const cartLink = screen.getByRole('link', { name: 'Cart' });
+    expect(homeLink).toBeInTheDocument();
+    expect(cartLink).toBeInTheDocument();
+  });
+
+  it('should navigate to home page upon clicking home link', async () => {
+    renderApp();
+    const homeLink = screen.getByRole('link', { name: 'Home' });
+    const user = userEvent.setup();
+    await user.click(homeLink);
+
+    screen.debug();
+
+    expect(screen.getByText(/welcome/i)).toBeInTheDocument();
+  });
+
+  it('should navigate to cart page upon clicking cart link', async () => {
+    renderApp();
+    const cartLink = screen.getByRole('link', { name: 'Cart' });
+    const user = userEvent.setup();
+    await user.click(cartLink);
+
+    screen.debug();
+
+    expect(screen.getByText(/your cart/i)).toBeInTheDocument();
+  });
+});
