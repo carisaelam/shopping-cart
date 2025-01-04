@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Navbar from './Navbar';
+import PropTypes from 'prop-types';
 
 // Basic router wrapper for simple tests
 const TestWrapper = ({ children }) => <MemoryRouter>{children}</MemoryRouter>;
@@ -63,3 +64,7 @@ describe('Active link behavior', () => {
     expect(homeLink.className).not.toMatch(/active/);
   });
 });
+
+TestWrapper.propTypes = {
+  children: PropTypes.any,
+};
