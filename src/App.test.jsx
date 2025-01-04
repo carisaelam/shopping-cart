@@ -39,8 +39,6 @@ describe('App Navigation', () => {
     const user = userEvent.setup();
     await user.click(homeLink);
 
-    screen.debug();
-
     expect(screen.getByText(/welcome/i)).toBeInTheDocument();
   });
 
@@ -49,8 +47,6 @@ describe('App Navigation', () => {
     const cartLink = screen.getByRole('link', { name: 'Cart' });
     const user = userEvent.setup();
     await user.click(cartLink);
-
-    screen.debug();
 
     expect(screen.getByText(/your cart/i)).toBeInTheDocument();
   });
