@@ -1,24 +1,27 @@
 .navbar__container {
-  background-color: yellow;
+  background-color: darkblue;
   height: fit-content;
   padding: 1rem;
   display: flex;
   min-width: 100vw;
   justify-content: space-between;
+  align-items: center;
 }
 
 .navbar__store {
   color: white;
+  background-color: inherit;
+  font-size: 2rem;
 }
 
 .navbar__links__container {
-  background-color: green;
-  color: white;
+  background-color: inherit;
 }
 
 .navbar__links__container ul {
   display: flex;
   gap: 1rem;
+  padding: 0.5rem;
 }
 
 .navbar__links__container > * {
@@ -31,14 +34,13 @@
   color: black;
   border: none;
   border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 .navbar__links__button:hover {
   cursor: pointer;
-  background-color: green;
-  font-weight: bold;
-  transform: scale(1.01);
-  transition: 0.2s;
+  background-color: orange;
 }
 
 .active {

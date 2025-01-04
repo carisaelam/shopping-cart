@@ -1,6 +1,5 @@
 import style from './Navbar.module.css';
 import { Link, useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 export default function Navbar() {
   const location = useLocation();
@@ -34,6 +33,4 @@ export default function Navbar() {
   );
 }
 
-Navbar.propTypes = {
-  onClick: PropTypes.func,
-};
+

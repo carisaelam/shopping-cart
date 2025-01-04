@@ -1,5 +1,6 @@
 * {
   font-family:
+    'Space Grotesk',
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
@@ -14,5 +15,4 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: blue;
 }
