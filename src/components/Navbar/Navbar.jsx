@@ -2,8 +2,7 @@ import style from './Navbar.module.css';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-export default function Navbar({ onClick }) {
-  console.log('✅ Navbar rendered');
+export default function Navbar() {
   const location = useLocation();
 
   return (
@@ -17,7 +16,6 @@ export default function Navbar({ onClick }) {
             <Link
               to="/"
               className={`${style.navbar__links__button} ${location.pathname === '/' ? style.active : ''}`}
-              onClick={onClick}
             >
               Home
             </Link>
@@ -26,7 +24,6 @@ export default function Navbar({ onClick }) {
             <Link
               to="/cart"
               className={`${style.navbar__links__button} ${location.pathname === '/cart' ? style.active : ''}`}
-              onClick={onClick}
             >
               Cart
             </Link>

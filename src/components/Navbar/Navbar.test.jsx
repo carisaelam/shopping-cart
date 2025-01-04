@@ -66,29 +66,6 @@ describe('Navbar component', () => {
   });
 });
 
-// Click interactions
-describe('Navbar interaction', () => {
-  const handleClick = vi.fn();
-
-  const renderNavbar = () => {
-    render(
-      <MemoryRouter>
-        <Navbar onClick={handleClick} />
-      </MemoryRouter>
-    );
-  };
-
-  it('should call onClick handler when clicked', async () => {
-    renderNavbar();
-    const homeLink = screen.getByRole('link', { name: 'Home' });
-    const user = userEvent.setup();
-
-    await user.click(homeLink);
-
-    expect(handleClick).toHaveBeenCalledTimes(1);
-  });
-});
-
 // Navigation
 describe('App Navigation', () => {
   const renderApp = () => {
