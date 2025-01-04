@@ -19,18 +19,19 @@ export default function Home() {
       <h1>Welcome</h1>
       <div>
         <p>Product cards go here</p>
-        {products.map((product) => {
-          return (
-            <ProductCard
-              key={product.id}
-              image={{ url: product.image, alt: `${product.title} img` }}
-              title={product.title}
-              price={product.price}
-              description={product.description}
-              category={product.category}
-            />
-          );
-        })}
+        {products &&
+          products.map((product) => {
+            return (
+              <ProductCard
+                key={product.id}
+                image={{ url: product.image, alt: `${product.title} img` }}
+                title={product.title}
+                price={product.price}
+                description={product.description}
+                category={product.category}
+              />
+            );
+          })}
       </div>
     </div>
   );
