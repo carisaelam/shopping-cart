@@ -1,7 +1,6 @@
 import style from './App.module.css';
 import Navbar from './components/Navbar/Navbar';
 import { Outlet } from 'react-router-dom';
-import ProductCard from './components/ProductCard/ProductCard';
 
 function App() {
   console.log('App rendered');
@@ -9,7 +8,6 @@ function App() {
     <div className={style.app__container}>
       <Navbar />
       <Outlet />
-      <ProductCard />
     </div>
   );
 }
