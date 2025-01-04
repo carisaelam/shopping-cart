@@ -5,6 +5,7 @@ import { Routes, Route, MemoryRouter } from 'react-router-dom';
 import App from './App';
 import Cart from './pages/Cart';
 import Home from './pages/Home';
+import ErrorPage from './pages/ErrorPage';
 
 // App Navigation
 describe('App Navigation', () => {
@@ -16,11 +17,13 @@ describe('App Navigation', () => {
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />
             <Route path="cart" element={<Cart />} />
+            <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
       </MemoryRouter>
     );
   };
+
   it('renders the app with navigation', () => {
     renderApp();
     expect(screen.getByText('Store')).toBeInTheDocument();

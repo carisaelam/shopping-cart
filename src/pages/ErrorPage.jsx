@@ -7,7 +7,7 @@ export default function ErrorPage() {
 
   return (
     <div>
-      <h1>Oopsie!</h1>
+      <h1>Error</h1>
       <div>
         <h2>Seems like we have an issue</h2>
         <p>
