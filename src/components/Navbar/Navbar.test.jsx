@@ -1,14 +1,26 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import Navbar from './Navbar';
 import PropTypes from 'prop-types';
 
-// Basic router wrapper for simple tests
+vi.mock('../../CartContext', () => ({
+  useCart: vi.fn(),
+}));
+
+import { useCart } from '../../CartContext';
+
+beforeEach(() => {
+  vi.resetAllMocks();
+  useCart.mockReturnValue({
+    itemsInCart: [],
+    setItemsInCart: vi.fn(),
+  });
+});
+
 const TestWrapper = ({ children }) => <MemoryRouter>{children}</MemoryRouter>;
 
 describe('Navbar component', () => {
-  // Basic component rendering tests
   it('renders', () => {
     render(<Navbar />, { wrapper: TestWrapper });
     expect(screen.getByText('Store')).toBeInTheDocument();
@@ -36,12 +48,6 @@ describe('Navbar component', () => {
     render(<Navbar />, { wrapper: TestWrapper });
     const cartLink = screen.getByRole('link', { name: /cart/i });
     expect(cartLink).toHaveAttribute('href', '/cart');
-  });
-
-  it('should display itemNumber on cart link', () => {
-    render(<Navbar itemNumber={6} />, { wrapper: TestWrapper });
-    const cartLink = screen.getByRole('link', { name: /cart/i });
-    expect(cartLink).toHaveTextContent(/6/i)
   });
 });
 

@@ -1,9 +1,11 @@
 import style from './Navbar.module.css';
-import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
+import { useCart } from '../../CartContext';
 
-export default function Navbar({ itemsInCart }) {
+export default function Navbar() {
   const location = useLocation();
+  const { itemsInCart = [] } = useCart() || {};
 
   return (
     <nav data-testid="navbar" className={style.navbar__container}>
@@ -38,3 +40,7 @@ export default function Navbar({ itemsInCart }) {
     </nav>
   );
 }
+
+Navbar.propTypes = {
+  itemsInCart: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};

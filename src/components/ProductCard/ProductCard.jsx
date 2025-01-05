@@ -8,9 +8,11 @@ export default function ProductCard({
   price = 'Product Price',
   description = 'Product Description',
   category = 'Product Category',
+  onAddToCart,
 }) {
-  function handleAddToCart(id) {
-    console.log('Adding item to cart with id: ', id);
+  function handleAddToCart() {
+    const product = { id, image, title, price, description, category };
+    onAddToCart?.(product);
   }
   return (
     <div className={style.card__container}>
@@ -27,10 +29,7 @@ export default function ProductCard({
         <p data-testid="product__category">{category}</p>
       </div>
       <div className={style.button__container}>
-        <button
-          onClick={() => handleAddToCart(id)}
-          data-testid="product__add__to__cart"
-        >
+        <button onClick={handleAddToCart} data-testid="product__add__to__cart">
           Add to Cart
         </button>
       </div>
@@ -45,4 +44,5 @@ ProductCard.propTypes = {
   price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   description: PropTypes.string,
   category: PropTypes.string,
+  onAddToCart: PropTypes.func,
 };

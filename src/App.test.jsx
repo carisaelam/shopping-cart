@@ -48,6 +48,6 @@ describe('App Navigation', () => {
     const user = userEvent.setup();
     await user.click(cartLink);
 
-    expect(screen.getByText(/your cart/i)).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /your cart/i }));
   });
 });
