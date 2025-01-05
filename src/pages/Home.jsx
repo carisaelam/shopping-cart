@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard/ProductCard';
+import style from './Home.module.css'
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -15,10 +16,9 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className={style.home__container}>
       <h1>Welcome</h1>
-      <div>
-        <p>Product cards go here</p>
+      <div className={style.product__card__container}>
         {products &&
           products.map((product) => {
             return (
