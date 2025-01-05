@@ -26,9 +26,11 @@ export default function Navbar({ itemNumber }) {
               className={`${style.navbar__links__button} ${location.pathname === '/cart' ? style.active : ''}`}
             >
               Cart
-              <span className={style.item__number}>
-                {itemNumber > 0 ? '[' + itemNumber + ']' : ''}
-              </span>
+              {itemNumber > 0 && (
+                <span className={style.item__number}>
+                  {itemNumber > 0 ? '[' + itemNumber + ']' : ''}
+                </span>
+              )}
             </Link>
           </li>
         </ul>
