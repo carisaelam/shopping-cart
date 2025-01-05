@@ -1,7 +1,7 @@
 import style from './Navbar.module.css';
 import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
-import { useCart } from '../../CartContext';
+import { useCart } from '../../context/CartContext';
 
 export default function Navbar() {
   const location = useLocation();

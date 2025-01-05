@@ -1,4 +1,4 @@
-import { useCart } from '../CartContext';
+import { useCart } from '../context/CartContext';
 import CartCard from '../components/CartCard/CartCard';
 
 export default function Cart() {

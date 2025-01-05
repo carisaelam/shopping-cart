@@ -4,11 +4,11 @@ import { MemoryRouter } from 'react-router-dom';
 import Navbar from './Navbar';
 import PropTypes from 'prop-types';
 
-vi.mock('../../CartContext', () => ({
+vi.mock('../../context/CartContext', () => ({
   useCart: vi.fn(),
 }));
 
-import { useCart } from '../../CartContext';
+import { useCart } from '../../context/CartContext';
 
 beforeEach(() => {
   vi.resetAllMocks();

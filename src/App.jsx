@@ -1,7 +1,7 @@
 import style from './App.module.css';
 import Navbar from './components/Navbar/Navbar';
 import { Outlet } from 'react-router-dom';
-import { CartProvider } from './CartContext';
+import { CartProvider } from './context/CartContext';
 
 function App() {
   return (

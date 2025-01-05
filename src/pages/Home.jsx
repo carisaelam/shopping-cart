@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard/ProductCard';
 import style from './Home.module.css';
-import { useCart } from '../CartContext';
+import { useCart } from '../context/CartContext';
 
 export default function Home() {
   const { addToCart, removeFromCart, itemsInCart } = useCart();
