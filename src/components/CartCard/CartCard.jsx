@@ -8,11 +8,11 @@ export default function CartCard({
   price = 'Product Price',
   description = 'Product Description',
   category = 'Product Category',
-  onAddToCart,
+  onButtonClick,
 }) {
   function handleRemoveFromCart() {
     const product = { id, image, title, price, description, category };
-    onAddToCart?.(product);
+    onButtonClick?.(product);
   }
   return (
     <div className={style.card__container}>
@@ -27,7 +27,10 @@ export default function CartCard({
         <p data-testid="product__price">${price}</p>
       </div>
       <div className={style.button__container}>
-        <button onClick={handleRemoveFromCart} data-testid="product__remove__from__cart">
+        <button
+          onClick={handleRemoveFromCart}
+          data-testid="product__remove__from__cart"
+        >
           Remove
         </button>
       </div>
@@ -42,5 +45,5 @@ CartCard.propTypes = {
   price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   description: PropTypes.string,
   category: PropTypes.string,
-  onAddToCart: PropTypes.func,
+  onButtonClick: PropTypes.func,
 };

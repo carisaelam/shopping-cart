@@ -4,7 +4,7 @@ import style from './Home.module.css';
 import { useCart } from '../CartContext';
 
 export default function Home() {
-  const { addToCart } = useCart();
+  const { addToCart, removeFromCart, itemsInCart } = useCart();
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -32,7 +32,12 @@ export default function Home() {
                 price={product.price}
                 description={product.description}
                 category={product.category}
-                onAddToCart={addToCart}
+                isInCart={itemsInCart.some((item) => item.id === product.id)}
+                onButtonClick={
+                  itemsInCart.some((item) => item.id === product.id)
+                    ? removeFromCart
+                    : addToCart
+                }
               />
             );
           })}

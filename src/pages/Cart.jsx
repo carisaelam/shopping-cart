@@ -13,7 +13,7 @@ export default function Cart() {
       <div>
         {itemsInCart.map((item) => {
           return (
-            <CartCard key={item.id} {...item} onAddToCart={removeFromCart} />
+            <CartCard key={item.id} {...item} onButtonClick={removeFromCart} />
           );
         })}
       </div>

@@ -8,11 +8,12 @@ export default function ProductCard({
   price = 'Product Price',
   description = 'Product Description',
   category = 'Product Category',
-  onAddToCart,
+  isInCart = false,
+  onButtonClick,
 }) {
-  function handleAddToCart() {
+  function handleButtonClick() {
     const product = { id, image, title, price, description, category };
-    onAddToCart?.(product);
+    onButtonClick?.(product);
   }
   return (
     <div className={style.card__container}>
@@ -29,8 +30,11 @@ export default function ProductCard({
         <p data-testid="product__category">{category}</p>
       </div>
       <div className={style.button__container}>
-        <button onClick={handleAddToCart} data-testid="product__add__to__cart">
-          Add to Cart
+        <button
+          onClick={handleButtonClick}
+          data-testid="product__add__to__cart"
+        >
+          {isInCart ? 'Remove from Cart' : 'Add to Cart'}
         </button>
       </div>
     </div>
@@ -44,5 +48,6 @@ ProductCard.propTypes = {
   price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   description: PropTypes.string,
   category: PropTypes.string,
-  onAddToCart: PropTypes.func,
+  isInCart: PropTypes.bool,
+  onButtonClick: PropTypes.func,
 };
