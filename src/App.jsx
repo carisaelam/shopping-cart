@@ -5,7 +5,7 @@ import { Outlet } from 'react-router-dom';
 function App() {
   return (
     <div className={style.app__container}>
-      <Navbar itemNumber={5}/>
+      <Navbar itemsInCart={5}/>
       <Outlet />
     </div>
   );

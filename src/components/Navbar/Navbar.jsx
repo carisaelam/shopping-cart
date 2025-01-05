@@ -2,7 +2,7 @@ import style from './Navbar.module.css';
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-export default function Navbar({ itemNumber }) {
+export default function Navbar({ itemsInCart }) {
   const location = useLocation();
 
   return (
@@ -26,9 +26,9 @@ export default function Navbar({ itemNumber }) {
               className={`${style.navbar__links__button} ${location.pathname === '/cart' ? style.active : ''}`}
             >
               Cart
-              {itemNumber > 0 && (
-                <span className={style.item__number}>
-                  {itemNumber > 0 ? '[' + itemNumber + ']' : ''}
+              {itemsInCart > 0 && (
+                <span className={style.items__in__cart}>
+                  {itemsInCart > 0 ? '[' + itemsInCart + ']' : ''}
                 </span>
               )}
             </Link>
