@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard/ProductCard';
-import style from './Home.module.css'
+import style from './Home.module.css';
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -24,6 +24,7 @@ export default function Home() {
             return (
               <ProductCard
                 key={product.id}
+                id={product.id}
                 image={{ url: product.image, alt: `${product.title} img` }}
                 title={product.title}
                 price={product.price}

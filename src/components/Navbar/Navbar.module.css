@@ -28,6 +28,12 @@
   list-style-type: none;
 }
 
+.item__number {
+  color: red;
+  font-weight: bold;
+  font-size: .8rem;
+}
+
 .navbar__links__button {
   padding: 0.5rem 1rem;
   background-color: white;
@@ -36,6 +42,9 @@
   border-radius: 0.5rem;
   text-decoration: none;
   font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .navbar__links__button:hover {

@@ -22,7 +22,7 @@ describe('Navbar component', () => {
 
   it('includes a cart link', () => {
     render(<Navbar />, { wrapper: TestWrapper });
-    const cartLink = screen.getByRole('link', { name: 'Cart' });
+    const cartLink = screen.getByRole('link', { name: /cart/i });
     expect(cartLink).toBeInTheDocument();
   });
 
@@ -34,8 +34,14 @@ describe('Navbar component', () => {
 
   it('should have the correct href for cart link', () => {
     render(<Navbar />, { wrapper: TestWrapper });
-    const cartLink = screen.getByRole('link', { name: 'Cart' });
+    const cartLink = screen.getByRole('link', { name: /cart/i });
     expect(cartLink).toHaveAttribute('href', '/cart');
+  });
+
+  it('should display itemNumber on cart link', () => {
+    render(<Navbar itemNumber={6} />, { wrapper: TestWrapper });
+    const cartLink = screen.getByRole('link', { name: /cart/i });
+    expect(cartLink).toHaveTextContent(/6/i)
   });
 });
 
@@ -47,7 +53,7 @@ describe('Active link behavior', () => {
       </MemoryRouter>
     );
     const homeLink = screen.getByRole('link', { name: 'Home' });
-    const cartLink = screen.getByRole('link', { name: 'Cart' });
+    const cartLink = screen.getByRole('link', { name: /cart/i });
     expect(homeLink.className).toMatch(/active/);
     expect(cartLink.className).not.toMatch(/active/);
   });
@@ -59,7 +65,7 @@ describe('Active link behavior', () => {
       </MemoryRouter>
     );
     const homeLink = screen.getByRole('link', { name: 'Home' });
-    const cartLink = screen.getByRole('link', { name: 'Cart' });
+    const cartLink = screen.getByRole('link', { name: /cart/i });
     expect(cartLink.className).toMatch(/active/);
     expect(homeLink.className).not.toMatch(/active/);
   });

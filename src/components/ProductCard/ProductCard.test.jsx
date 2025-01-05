@@ -11,6 +11,19 @@ describe('Product Card component', () => {
 
   // Props
 
+  // Id
+  it('should render the id prop correctly', () => {
+    render(<ProductCard id="1234" />);
+    expect(screen.getByTestId('product__id')).toHaveTextContent('1234');
+  });
+
+  it('should render default title', () => {
+    render(<ProductCard />);
+    expect(screen.getByTestId('product__title')).toHaveTextContent(
+      'Product Title'
+    );
+  });
+
   // Image
   it('should render the img prop correctly', () => {
     render(

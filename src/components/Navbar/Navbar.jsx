@@ -1,7 +1,8 @@
 import style from './Navbar.module.css';
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-export default function Navbar() {
+export default function Navbar({ itemNumber }) {
   const location = useLocation();
 
   return (
@@ -25,6 +26,9 @@ export default function Navbar() {
               className={`${style.navbar__links__button} ${location.pathname === '/cart' ? style.active : ''}`}
             >
               Cart
+              <span className={style.item__number}>
+                {itemNumber > 0 ? '[' + itemNumber + ']' : ''}
+              </span>
             </Link>
           </li>
         </ul>
@@ -32,5 +36,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
-
