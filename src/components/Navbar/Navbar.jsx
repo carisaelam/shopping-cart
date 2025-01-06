@@ -17,7 +17,7 @@ export default function Navbar() {
           <li>
             <Link
               to="/"
-              className={`${style.navbar__links__button} ${location.pathname === '/' ? style.active : ''}`}
+              className={`${style.home__button} ${location.pathname === '/' ? style.active : ''}`}
             >
               Home
             </Link>
@@ -25,7 +25,7 @@ export default function Navbar() {
           <li>
             <Link
               to="/cart"
-              className={`${style.navbar__links__button} ${location.pathname === '/cart' ? style.active : ''}`}
+              className={`${style.cart__button} ${location.pathname === '/cart' ? style.active : ''}`}
             >
               Cart
               {itemsInCart.length > 0 && (

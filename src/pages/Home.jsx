@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <div className={style.home__container}>
-      <h1>Welcome</h1>
+      <h2>Welcome</h2>
       <div
         data-testid="product__card__container"
         className={style.product__card__container}

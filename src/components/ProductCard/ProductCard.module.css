@@ -1,9 +1,9 @@
 .card__container {
   max-width: 20rem;
-  background-color: white;
+  background-color: #FFFFFF;
   border: none;
   border-radius: 1rem;
-  box-shadow: 0 0 5px grey;
+  box-shadow: 0 0 10px #36454F;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

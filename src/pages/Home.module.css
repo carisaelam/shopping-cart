@@ -1,9 +1,15 @@
 .home__container {
-    background-color: yellow;
-  
+  background-color: #000080;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.home__container h2 {
+  color: white;
 }
 
 .product__card__container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr) ) ;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  padding: 0;
 }

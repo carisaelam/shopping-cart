@@ -1,15 +1,15 @@
 .navbar__container {
-  background-color: darkblue;
+  background-color: #ffffff;
   height: fit-content;
-  padding: 1rem;
+  padding: 1rem 1rem 0 1rem;
   display: flex;
   min-width: 100vw;
   justify-content: space-between;
-  align-items: center;
+  align-items: end;
 }
 
 .navbar__store {
-  color: white;
+  color: #36454f;
   background-color: inherit;
   font-size: 2rem;
 }
@@ -21,7 +21,6 @@
 .navbar__links__container ul {
   display: flex;
   gap: 1rem;
-  padding: 0.5rem;
 }
 
 .navbar__links__container > * {
@@ -29,18 +28,19 @@
 }
 
 .items__in__cart {
-  color: red;
+  color: orange;
   font-weight: bold;
-  font-size: .8rem;
-  margin-left: .3rem;
+  font-size: 0.8rem;
+  margin-left: 0.3rem;
 }
 
-.navbar__links__button {
+.home__button, .cart__button {
   padding: 0.5rem 1rem;
-  background-color: white;
-  color: black;
+  background-color: #000080;
+  color: rgb(222, 222, 222);
   border: none;
-  border-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-top-left-radius: 0.5rem;
   text-decoration: none;
   font-weight: bold;
   display: flex;
@@ -48,12 +48,18 @@
   align-items: center;
 }
 
-.navbar__links__button:hover {
-  cursor: pointer;
-  background-color: orange;
+.cart__button {
+  background-color: #2d3864;
 }
 
-.active {
-  background-color: rgb(171, 169, 169);
-  color: rgb(58, 58, 58);
+.home__button:hover,
+.cart__button:hover {
+  cursor: pointer;
+  transition: 0.2s;
+  color: white;
+}
+
+.home__button .active {
+  background-color: #000080;
+  color: rgb(181, 181, 181);
 }

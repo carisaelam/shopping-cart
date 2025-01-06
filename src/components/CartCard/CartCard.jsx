@@ -28,6 +28,7 @@ export default function CartCard({
       </div>
       <div className={style.button__container}>
         <button
+          className={style.remove__button}
           onClick={handleRemoveFromCart}
           data-testid="product__remove__from__cart"
         >
