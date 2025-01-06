@@ -3,6 +3,7 @@
   min-height: 100vh;
   color: #36454f;
   padding: 1rem;
+  box-sizing: border-box;
 }
 
 .cart__heading__container {
