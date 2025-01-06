@@ -26,7 +26,7 @@ export default function ProductCard({
           {id}
         </p>
         <p data-testid="product__price">${price}</p>
-        <p data-testid="product__description">{description}</p>
+        <p data-testid="product__description" className={style.product__description}>{description}</p>
         <p data-testid="product__category">{category}</p>
       </div>
       <div className={style.button__container}>

@@ -71,3 +71,8 @@
   border-radius: 0.5rem;
   color: white;
 }
+
+
+.product__description {
+  word-wrap: break-word;
+}

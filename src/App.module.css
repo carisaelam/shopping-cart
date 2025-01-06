@@ -1,5 +1,9 @@
 .app__container {
-  background-color: #4A90E2;
+  background-color: #4a90e2;
   display: grid;
+  grid-template-columns: 1fr;
   place-content: center;
+  width: 100%;
+  min-height: 100vh;
+
 }

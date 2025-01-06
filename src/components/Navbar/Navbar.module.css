@@ -3,7 +3,6 @@
   height: fit-content;
   padding: 1rem 1rem 0 1rem;
   display: flex;
-  min-width: 100vw;
   justify-content: space-between;
   align-items: end;
 }
@@ -34,7 +33,8 @@
   margin-left: 0.3rem;
 }
 
-.home__button, .cart__button {
+.home__button,
+.cart__button {
   padding: 0.5rem 1rem;
   background-color: #000080;
   color: rgb(222, 222, 222);
