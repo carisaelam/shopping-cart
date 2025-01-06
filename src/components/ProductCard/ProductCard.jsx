@@ -31,6 +31,7 @@ export default function ProductCard({
       </div>
       <div className={style.button__container}>
         <button
+          className={isInCart ? style.remove__button : style.add__button}
           onClick={handleButtonClick}
           data-testid="product__add__to__cart"
         >

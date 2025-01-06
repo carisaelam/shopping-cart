@@ -20,7 +20,10 @@ export default function Home() {
   return (
     <div className={style.home__container}>
       <h1>Welcome</h1>
-      <div className={style.product__card__container}>
+      <div
+        data-testid="product__card__container"
+        className={style.product__card__container}
+      >
         {products &&
           products.map((product) => {
             return (
