@@ -10,7 +10,6 @@ vi.mock('../context/CartContext', () => ({
   CartProvider: ({ children }) => <div>{children}</div>,
 }));
 
-
 describe('Cart Page', () => {
   const router = createMemoryRouter(
     [
@@ -25,10 +24,6 @@ describe('Cart Page', () => {
     ],
     { initialEntries: ['/cart'] }
   );
-
-  beforeEach(() => {
-    vi.clearAllMocks(); // Ensures previous test mocks do not affect new tests
-  });
 
   it('should render the Cart Page', () => {
     useCart.mockReturnValue({
@@ -51,8 +46,8 @@ describe('Cart Page', () => {
       addToCart: vi.fn(),
       removeFromCart: vi.fn(),
       itemsInCart: [
-        { id: 1, title: 'Product 1', price: 10 },
-        { id: 2, title: 'Product 2', price: 20 },
+        { id: 1, title: 'Product 1', price: 10, quantity: 1 },
+        { id: 2, title: 'Product 2', price: 20, quantity: 1 },
       ],
     });
 

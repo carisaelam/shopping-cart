@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import style from './CartCard.module.css';
+import { useState, useEffect } from 'react';
 
 export default function CartCard({
   id = '000',
@@ -7,13 +8,37 @@ export default function CartCard({
   title = 'Product Title',
   price = 'Product Price',
   description = 'Product Description',
+  quantity = 0,
   category = 'Product Category',
   onButtonClick,
+  onQuantityChange,
 }) {
+  const [currentQuantity, setCurrentQuantity] = useState(quantity);
+
+  useEffect(() => {
+    console.log('updating qty in CartCard', quantity);
+    setCurrentQuantity(quantity);
+  }, [quantity]);
+
   function handleRemoveFromCart() {
-    const product = { id, image, title, price, description, category };
+    const product = {
+      id,
+      image,
+      title,
+      price,
+      description,
+      category,
+      quantity: currentQuantity,
+    };
     onButtonClick?.(product);
   }
+
+  function updateQuantity(e) {
+    const newQuantity = Math.max(0, parseInt(e.target.value));
+    setCurrentQuantity(newQuantity);
+    onQuantityChange?.(id, newQuantity);
+  }
+
   return (
     <div className={style.card__container}>
       <div className={style.image__container}>
@@ -25,6 +50,15 @@ export default function CartCard({
           {id}
         </p>
         <p data-testid="product__price">${price}</p>
+        <label htmlFor="quantity">Qty: </label>
+        <input
+          name="quantity"
+          type="number"
+          value={currentQuantity}
+          min="0"
+          onChange={updateQuantity}
+          data-testid="product__quantity"
+        ></input>
       </div>
       <div className={style.button__container}>
         <button
@@ -46,5 +80,7 @@ CartCard.propTypes = {
   price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   description: PropTypes.string,
   category: PropTypes.string,
+  quantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onButtonClick: PropTypes.func,
+  onQuantityChange: PropTypes.func,
 };

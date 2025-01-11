@@ -4,10 +4,9 @@ import { useCart } from '../context/CartContext';
 import { useProducts } from '../App';
 
 export default function Home() {
-  const { addToCart, removeFromCart, itemsInCart } = useCart();
+  const { addToCart, itemsInCart, updateQuantity } = useCart();
   const products = useProducts();
 
-  
   return (
     <div className={style.home__container}>
       <h2>Welcome</h2>
@@ -26,10 +25,11 @@ export default function Home() {
                 price={product.price}
                 description={product.description}
                 category={product.category}
+                quantity={0}
                 isInCart={itemsInCart.some((item) => item.id === product.id)}
                 onButtonClick={
                   itemsInCart.some((item) => item.id === product.id)
-                    ? removeFromCart
+                    ? updateQuantity
                     : addToCart
                 }
               />

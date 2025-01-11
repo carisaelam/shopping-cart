@@ -10,6 +10,31 @@ export function CartProvider({ children }) {
     setItemsInCart((prevItems) => [...prevItems, product]);
   }
 
+  function updateQuantity(id, quantity) {
+    console.log(
+      'updating quantity for product id: ',
+      id,
+      'New qty: ',
+      quantity
+    );
+
+    setItemsInCart((prevItems) => {
+      console.log('calling setItems from updateQuantity: prevItems', prevItems);
+
+      const updatedItems = prevItems.map((item) => {
+        if (item.id === id) {
+          console.log('updating item: ', item);
+          return { ...item, quantity: quantity };
+        }
+        return item;
+      });
+
+      console.log('updatedItems', updatedItems);
+
+      return updatedItems;
+    });
+  }
+
   function removeFromCart(product) {
     setItemsInCart((prevItems) =>
       prevItems.filter((item) => item.id !== product.id)
@@ -17,7 +42,9 @@ export function CartProvider({ children }) {
   }
 
   return (
-    <CartContext.Provider value={{ itemsInCart, addToCart, removeFromCart }}>
+    <CartContext.Provider
+      value={{ itemsInCart, addToCart, removeFromCart, updateQuantity }}
+    >
       {children}
     </CartContext.Provider>
   );

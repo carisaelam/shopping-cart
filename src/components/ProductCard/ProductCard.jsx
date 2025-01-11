@@ -9,13 +9,24 @@ export default function ProductCard({
   price = 'Product Price',
   description = 'Product Description',
   category = 'Product Category',
+  quantity = '0',
   isInCart = false,
   onButtonClick,
 }) {
   const [showFullDescription, setShowFullDescription] = useState(false);
 
+  const [currentQuantity, setCurrentQuantity] = useState(quantity);
+
   function handleButtonClick() {
-    const product = { id, image, title, price, description, category };
+    const product = {
+      id,
+      image,
+      title,
+      price,
+      description,
+      category,
+      quantity: currentQuantity,
+    };
     onButtonClick?.(product);
   }
 
@@ -29,6 +40,11 @@ export default function ProductCard({
     description.length > MAX_CHARS && !showFullDescription
       ? description.slice(0, MAX_CHARS) + '...'
       : description;
+
+  function updateQuantity(e) {
+    const newQuantity = Math.max(0, parseInt(e.target.value));
+    setCurrentQuantity(newQuantity);
+  }
 
   return (
     <div className={style.card__container}>
@@ -59,12 +75,21 @@ export default function ProductCard({
         </p>
       </div>
       <div className={style.button__container}>
+        <label htmlFor="quantity">Qty: </label>
+        <input
+          name="quantity"
+          type="number"
+          value={currentQuantity}
+          min="0"
+          onChange={(e) => updateQuantity(e)}
+          data-testid="product__quantity"
+        ></input>
         <button
           className={isInCart ? style.remove__button : style.add__button}
           onClick={handleButtonClick}
           data-testid="product__add__to__cart"
         >
-          {isInCart ? 'Remove from Cart' : 'Add to Cart'}
+          {isInCart ? 'Update Quantity' : 'Add to Cart'}
         </button>
       </div>
     </div>
@@ -78,6 +103,7 @@ ProductCard.propTypes = {
   price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   description: PropTypes.string,
   category: PropTypes.string,
+  quantity: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   isInCart: PropTypes.bool,
   onButtonClick: PropTypes.func,
 };
