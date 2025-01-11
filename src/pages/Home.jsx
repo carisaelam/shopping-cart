@@ -1,25 +1,16 @@
-import { useState, useEffect } from 'react';
 import ProductCard from '../components/ProductCard/ProductCard';
 import style from './Home.module.css';
 import { useCart } from '../context/CartContext';
+import { useProducts } from '../App';
 
 export default function Home() {
   const { addToCart, removeFromCart, itemsInCart } = useCart();
-  const [products, setProducts] = useState([]);
+  const products = useProducts();
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await fetch('https://fakestoreapi.com/products');
-      const data = await response.json();
-      setProducts(data);
-    }
-
-    fetchData();
-  }, []);
-
+  
   return (
     <div className={style.home__container}>
-      {products.length === 0 ? <h2>Loading...</h2> : <h2>Welcome</h2>}
+      <h2>Welcome</h2>
       <div
         data-testid="product__card__container"
         className={style.product__card__container}

@@ -41,7 +41,7 @@ describe('Home Page', () => {
 
     render(<RouterProvider router={router} />);
 
-    const homeText = screen.getByRole('heading', { name: /loading/i });
+    const homeText = screen.getByRole('heading', { name: /welcome/i });
     expect(homeText).toBeInTheDocument();
   });
 
