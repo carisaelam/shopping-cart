@@ -1,5 +1,7 @@
 import PropTypes from 'prop-types';
 import style from './ProductCard.module.css';
+import { useSearchParams } from 'react-router-dom';
+import { useState } from 'react';
 
 export default function ProductCard({
   id = '000',
@@ -11,10 +13,24 @@ export default function ProductCard({
   isInCart = false,
   onButtonClick,
 }) {
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
   function handleButtonClick() {
     const product = { id, image, title, price, description, category };
     onButtonClick?.(product);
   }
+
+  const MAX_CHARS = 150;
+
+  function toggleDescription() {
+    setShowFullDescription(!showFullDescription);
+  }
+
+  const truncatedDescription =
+    description.length > MAX_CHARS && !showFullDescription
+      ? description.slice(0, MAX_CHARS) + '...'
+      : description;
+
   return (
     <div className={style.card__container}>
       <div className={style.image__container}>
@@ -26,8 +42,22 @@ export default function ProductCard({
           {id}
         </p>
         <p data-testid="product__price">${price}</p>
-        <p data-testid="product__description" className={style.product__description}>{description}</p>
-        <p data-testid="product__category">{category}</p>
+
+        <p
+          data-testid="product__description"
+          className={style.product__description}
+        >
+          {truncatedDescription}
+          {description.length > 200 && (
+            <span className={style.see__more} onClick={toggleDescription}>
+              {showFullDescription ? 'see less' : 'see more'}
+            </span>
+          )}
+        </p>
+
+        <p data-testid="product__category" hidden>
+          {category}
+        </p>
       </div>
       <div className={style.button__container}>
         <button
