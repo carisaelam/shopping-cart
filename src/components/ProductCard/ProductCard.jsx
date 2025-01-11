@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import style from './ProductCard.module.css';
-import { useSearchParams } from 'react-router-dom';
 import { useState } from 'react';
 
 export default function ProductCard({
