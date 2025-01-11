@@ -39,7 +39,7 @@ describe('App Navigation', () => {
     const user = userEvent.setup();
     await user.click(homeLink);
 
-    expect(screen.getByText(/welcome/i)).toBeInTheDocument();
+    expect(screen.getByText(/loading/i)).toBeInTheDocument();
   });
 
   it('should navigate to cart page upon clicking cart link', async () => {

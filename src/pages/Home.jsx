@@ -19,7 +19,7 @@ export default function Home() {
 
   return (
     <div className={style.home__container}>
-      <h2>Welcome</h2>
+      {products.length === 0 ? <h2>Loading...</h2> : <h2>Welcome</h2>}
       <div
         data-testid="product__card__container"
         className={style.product__card__container}
