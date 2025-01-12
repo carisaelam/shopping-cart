@@ -74,20 +74,22 @@ export default function CartCard({
         </div>
 
         <button
-          className={style.update__button}
+          className={
+            quantityInputVisible ? style.done__button : style.update__button
+          }
           onClick={toggleQuantityInput}
           data-testid="product__update__quantity"
         >
           {quantityInputVisible ? 'Done' : 'Update Quantity'}
         </button>
       </div>
-      <button
-        className={style.remove__button}
-        onClick={handleRemoveFromCart}
-        data-testid="product__remove__from__cart"
-      >
-        Remove
-      </button>
+        <button
+          className={style.remove__button}
+          onClick={handleRemoveFromCart}
+          data-testid="product__remove__from__cart"
+        >
+          Remove
+        </button>
     </div>
   );
 }

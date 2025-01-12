@@ -32,6 +32,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 1rem;
 }
 
 .quantity__container {
@@ -86,6 +87,25 @@
   color: white;
 }
 
+.done__button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
+  min-width: 8rem;
+  background-color: green;
+  box-shadow: 0 0 5px grey;
+  color: white;
+}
+
+.done__button:hover {
+  cursor: pointer;
+  background-color: hsl(120, 100%, 15%);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  border-radius: 0.5rem;
+  color: white;
+}
+
 .remove__button {
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
@@ -93,6 +113,8 @@
   background-color: hsl(3, 100%, 51%);
   box-shadow: 0 0 5px grey;
   color: white;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .remove__button:hover {

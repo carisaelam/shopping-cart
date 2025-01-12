@@ -17,7 +17,6 @@ export default function ProductCard({
 
   const [currentQuantity, setCurrentQuantity] = useState(quantity);
 
-  const [quantityIsVisible, setQuantityIsVisible] = useState(true);
 
   useEffect(() => {
     setCurrentQuantity(isInCart ? quantity : 1);
@@ -99,14 +98,12 @@ export default function ProductCard({
           ) : (
             <div>
               <label
-                hidden={!quantityIsVisible}
                 className={style.quantity__label}
                 htmlFor="quantity"
               >
                 Qty:{' '}
               </label>
               <input
-                hidden={!quantityIsVisible}
                 className={style.quantity__input}
                 name="quantity"
                 type="number"
