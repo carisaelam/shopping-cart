@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import style from './ProductCard.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function ProductCard({
   id = '000',
@@ -19,6 +19,14 @@ export default function ProductCard({
 
   const [quantityIsVisible, setQuantityIsVisible] = useState(true);
 
+  useEffect(() => {
+    if (isInCart) {
+      setCurrentQuantity(quantity);
+    } else {
+      setCurrentQuantity(0);
+    }
+  }, [isInCart, quantity]);
+
   function handleButtonClick() {
     const product = {
       id,
@@ -29,8 +37,11 @@ export default function ProductCard({
       category,
       quantity: currentQuantity,
     };
-    setQuantityIsVisible(!quantityIsVisible);
-    onButtonClick?.(product);
+    if (isInCart) {
+      onButtonClick?.(product);
+    } else {
+      onButtonClick?.({ ...product, quantity: 1 });
+    }
   }
 
   const MAX_CHARS = 150;
@@ -79,19 +90,29 @@ export default function ProductCard({
       </div>
       <div className={style.button__container}>
         <div className="quantity__container">
-          <p hidden={quantityIsVisible} >{currentQuantity} in cart</p>
-          <label hidden={!quantityIsVisible}  className={style.quantity__label} htmlFor="quantity">
-            Qty:{' '}
-          </label>
-          <input hidden={!quantityIsVisible} 
-            className={style.quantity__input}
-            name="quantity"
-            type="number"
-            value={currentQuantity}
-            min="0"
-            onChange={(e) => updateQuantity(e)}
-            data-testid="product__quantity"
-          ></input>
+          {isInCart ? (
+            <p>{currentQuantity} in cart</p>
+          ) : (
+            <div>
+              <label
+                hidden={!quantityIsVisible}
+                className={style.quantity__label}
+                htmlFor="quantity"
+              >
+                Qty:{' '}
+              </label>
+              <input
+                hidden={!quantityIsVisible}
+                className={style.quantity__input}
+                name="quantity"
+                type="number"
+                value={currentQuantity}
+                min="0"
+                onChange={(e) => updateQuantity(e)}
+                data-testid="product__quantity"
+              ></input>
+            </div>
+          )}
         </div>
         <button
           className={isInCart ? style.remove__button : style.add__button}

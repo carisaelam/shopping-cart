@@ -16,6 +16,8 @@ export default function Home() {
       >
         {products &&
           products.map((product) => {
+            const cartItem = itemsInCart.find((item) => item.id === product.id);
+            const quantity = cartItem ? cartItem.quantity : 1;
             return (
               <ProductCard
                 key={product.id}
@@ -25,7 +27,7 @@ export default function Home() {
                 price={product.price}
                 description={product.description}
                 category={product.category}
-                quantity={1}
+                quantity={quantity}
                 isInCart={itemsInCart.some((item) => item.id === product.id)}
                 onButtonClick={
                   itemsInCart.some((item) => item.id === product.id)
