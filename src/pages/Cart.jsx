@@ -17,7 +17,6 @@ export default function Cart() {
   }, [itemsInCart]);
 
   function calculateCartTotal(items) {
-    console.log('calculating cartTotal', items);
     let total = 0;
     items.map((item) => {
       let subtotal = item.price * item.quantity;
