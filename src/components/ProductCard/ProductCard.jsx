@@ -26,7 +26,7 @@ export default function ProductCard({
     if (isInCart) {
       setCurrentQuantity(quantity);
     } else {
-      setCurrentQuantity(0);
+      setCurrentQuantity(1);
     }
   }, [isInCart, quantity]);
 
@@ -108,7 +108,7 @@ export default function ProductCard({
                 name="quantity"
                 type="number"
                 value={currentQuantity}
-                min="0"
+                min="1"
                 onChange={(e) => updateQuantity(e)}
                 data-testid="product__quantity"
               ></input>

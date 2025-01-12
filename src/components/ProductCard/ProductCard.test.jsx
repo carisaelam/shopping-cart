@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import ProductCard from './ProductCard';
 
 describe('Product Card component', () => {
@@ -90,5 +92,35 @@ describe('Product Card component', () => {
   it('should render the add to cart button correctly', () => {
     render(<ProductCard />);
     expect(screen.getByTestId('product__add__to__cart')).toBeInTheDocument();
+  });
+
+  // Quantity
+  it('should render the initial quantity of 1 when item not in cart', () => {
+    render(<ProductCard isInCart={false} />);
+    expect(screen.getByTestId('product__quantity')).toHaveValue(1);
+  });
+
+  it('should render items in cart message correctly', () => {
+    render(<ProductCard isInCart={true} quantity={3} />);
+    expect(screen.queryByTestId('product__quantity')).not.toBeInTheDocument();
+    expect(screen.getByText('3 in cart')).toBeInTheDocument();
+  });
+
+  it('should update quantity when input changes', async () => {
+    render(<ProductCard isInCart={false} />);
+    const quantityInput = screen.getByTestId('product__quantity');
+    const user = userEvent.setup();
+
+    await user.clear(quantityInput);
+    await user.type(quantityInput, '3');
+    expect(quantityInput).toHaveValue(3);
+  });
+
+  it('should update quantity display when isInCart changes', () => {
+    const { rerender } = render(<ProductCard isInCart={false} quantity={2} />);
+    expect(screen.getByTestId('product__quantity')).toHaveValue(1);
+
+    rerender(<ProductCard isInCart={true} quantity={2} />);
+    expect(screen.getByText('2 in cart')).toBeInTheDocument();
   });
 });
