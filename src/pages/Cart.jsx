@@ -2,7 +2,6 @@ import { useCart } from '../context/CartContext';
 import CartCard from '../components/CartCard/CartCard';
 import style from './Cart.module.css';
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
 
 export default function Cart() {
   const { itemsInCart, removeFromCart, updateQuantity, countItems } = useCart();

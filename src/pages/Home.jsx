@@ -25,7 +25,7 @@ export default function Home() {
                 id={product.id}
                 image={{ url: product.image, alt: `${product.title} image` }}
                 title={product.title}
-                price={product.price}
+                price={product.price.toFixed(2)}
                 description={product.description}
                 category={product.category}
                 quantity={quantity}
