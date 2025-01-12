@@ -17,6 +17,8 @@ export default function ProductCard({
 
   const [currentQuantity, setCurrentQuantity] = useState(quantity);
 
+  const [quantityIsVisible, setQuantityIsVisible] = useState(true);
+
   function handleButtonClick() {
     const product = {
       id,
@@ -27,6 +29,7 @@ export default function ProductCard({
       category,
       quantity: currentQuantity,
     };
+    setQuantityIsVisible(!quantityIsVisible);
     onButtonClick?.(product);
   }
 
@@ -76,10 +79,11 @@ export default function ProductCard({
       </div>
       <div className={style.button__container}>
         <div className="quantity__container">
-          <label className={style.quantity__label} htmlFor="quantity">
+          <p hidden={quantityIsVisible} >{currentQuantity} in cart</p>
+          <label hidden={!quantityIsVisible}  className={style.quantity__label} htmlFor="quantity">
             Qty:{' '}
           </label>
-          <input
+          <input hidden={!quantityIsVisible} 
             className={style.quantity__input}
             name="quantity"
             type="number"
