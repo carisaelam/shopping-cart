@@ -16,24 +16,21 @@ export default function Home() {
       >
         {products &&
           products.map((product) => {
+            const isInCart = itemsInCart.some((item) => item.id === product.id);
             const cartItem = itemsInCart.find((item) => item.id === product.id);
             const quantity = cartItem ? cartItem.quantity : 1;
             return (
               <ProductCard
                 key={product.id}
                 id={product.id}
-                image={{ url: product.image, alt: `${product.title} img` }}
+                image={{ url: product.image, alt: `${product.title} image` }}
                 title={product.title}
                 price={product.price}
                 description={product.description}
                 category={product.category}
                 quantity={quantity}
-                isInCart={itemsInCart.some((item) => item.id === product.id)}
-                onButtonClick={
-                  itemsInCart.some((item) => item.id === product.id)
-                    ? removeFromCart
-                    : addToCart
-                }
+                isInCart={isInCart}
+                onButtonClick={isInCart ? removeFromCart : addToCart}
               />
             );
           })}

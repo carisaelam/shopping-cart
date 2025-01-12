@@ -3,6 +3,11 @@ import Home from './Home';
 import { render, screen } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router';
 import { CartProvider, useCart } from '../context/CartContext';
+import { useProducts } from '../App';
+
+vi.mock('../App', () => ({
+  useProducts: vi.fn(),
+}));
 
 vi.mock('../context/CartContext', () => ({
   useCart: vi.fn(),
@@ -60,5 +65,36 @@ describe('Home Page', () => {
     const productCardContainer = screen.getByTestId('product__card__container');
 
     expect(productCardContainer).toBeInTheDocument();
+  });
+
+  it('should render correct number of ProductCard components', () => {
+    const mockProducts = [
+      {
+        id: 1,
+        title: 'Product 1',
+        price: 10,
+        image: 'url1',
+        description: 'desc1',
+        category: 'cat1',
+      },
+      {
+        id: 2,
+        title: 'Product 2',
+        price: 20,
+        image: 'url2',
+        description: 'desc2',
+        category: 'cat2',
+      },
+    ];
+    useProducts.mockReturnValue(mockProducts);
+    useCart.mockReturnValue({
+      addToCart: vi.fn(),
+      removeFromCart: vi.fn(),
+      itemsInCart: [],
+    });
+
+    render(<RouterProvider router={router} />);
+    const productCards = screen.getAllByTestId('product__title');
+    expect(productCards).toHaveLength(2);
   });
 });

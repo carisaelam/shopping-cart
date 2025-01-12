@@ -17,7 +17,6 @@ export default function ProductCard({
 
   const [currentQuantity, setCurrentQuantity] = useState(quantity);
 
-
   useEffect(() => {
     setCurrentQuantity(isInCart ? quantity : 1);
   }, [isInCart, quantity]);
@@ -97,10 +96,7 @@ export default function ProductCard({
             <p>{currentQuantity} in cart</p>
           ) : (
             <div>
-              <label
-                className={style.quantity__label}
-                htmlFor="quantity"
-              >
+              <label className={style.quantity__label} htmlFor="quantity">
                 Qty:{' '}
               </label>
               <input
@@ -118,7 +114,9 @@ export default function ProductCard({
         <button
           className={isInCart ? style.remove__button : style.add__button}
           onClick={handleButtonClick}
-          data-testid="product__add__to__cart"
+          data-testid={
+            isInCart ? 'product__remove__from__cart' : 'product__add__to__cart'
+          }
         >
           {isInCart ? 'Remove from Cart' : 'Add to Cart'}
         </button>
