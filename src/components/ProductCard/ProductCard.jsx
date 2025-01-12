@@ -20,6 +20,10 @@ export default function ProductCard({
   const [quantityIsVisible, setQuantityIsVisible] = useState(true);
 
   useEffect(() => {
+    setCurrentQuantity(isInCart ? quantity : 1);
+  }, [isInCart, quantity]);
+
+  useEffect(() => {
     if (isInCart) {
       setCurrentQuantity(quantity);
     } else {
@@ -40,7 +44,7 @@ export default function ProductCard({
     if (isInCart) {
       onButtonClick?.(product);
     } else {
-      onButtonClick?.({ ...product, quantity: 1 });
+      onButtonClick?.({ ...product, quantity: currentQuantity || 1 });
     }
   }
 
