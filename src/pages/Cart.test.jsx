@@ -1,4 +1,4 @@
-import { it, describe, expect, vi, beforeEach } from 'vitest';
+import { it, describe, expect, vi } from 'vitest';
 import Cart from './Cart';
 import { render, screen } from '@testing-library/react';
 import { RouterProvider, createMemoryRouter } from 'react-router';

@@ -50,25 +50,35 @@ export default function CartCard({
           {id}
         </p>
         <p data-testid="product__price">${price}</p>
-        <label htmlFor="quantity">Qty: </label>
-        <input
-          name="quantity"
-          type="number"
-          value={currentQuantity}
-          min="0"
-          onChange={updateQuantity}
-          data-testid="product__quantity"
-        ></input>
       </div>
       <div className={style.button__container}>
+        <div className="quantity__container">
+          <label htmlFor="quantity">Qty: </label>
+          <input
+            className={style.quantity__input}
+            name="quantity"
+            type="number"
+            value={currentQuantity}
+            min="0"
+            onChange={updateQuantity}
+            data-testid="product__quantity"
+          ></input>
+        </div>
         <button
+          className={style.update__button}
+          onClick={handleRemoveFromCart}
+          data-testid="product__update__quantity"
+        >
+          Update Quantity
+        </button>
+      </div>
+      <button
           className={style.remove__button}
           onClick={handleRemoveFromCart}
           data-testid="product__remove__from__cart"
         >
           Remove
         </button>
-      </div>
     </div>
   );
 }
