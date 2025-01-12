@@ -94,7 +94,7 @@ export default function ProductCard({
           onClick={handleButtonClick}
           data-testid="product__add__to__cart"
         >
-          {isInCart ? 'Update Quantity' : 'Add to Cart'}
+          {isInCart ? 'Remove from Cart' : 'Add to Cart'}
         </button>
       </div>
     </div>

@@ -15,6 +15,7 @@ beforeEach(() => {
   useCart.mockReturnValue({
     itemsInCart: [],
     setItemsInCart: vi.fn(),
+    countItems: vi.fn(),
   });
 });
 

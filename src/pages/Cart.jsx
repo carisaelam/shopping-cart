@@ -4,22 +4,14 @@ import style from './Cart.module.css';
 import { useEffect } from 'react';
 
 export default function Cart() {
-  const { itemsInCart, removeFromCart, updateQuantity } = useCart();
+  const { itemsInCart, removeFromCart, updateQuantity, countItems } = useCart();
 
   function handleQuantityChange(id, newQuantity) {
     console.log('handleQuantityChange firing for id: ', id);
     updateQuantity(id, newQuantity);
   }
 
-  function countItems(items) {
-    let count = 0;
-    items.forEach((item) => {
-      count += item.quantity;
-    });
-
-    return count;
-  }
-
+ 
   useEffect(() => {
     console.log('Items in Cart:', itemsInCart);
   }, [itemsInCart]);

@@ -5,7 +5,7 @@ import { useCart } from '../../context/CartContext';
 
 export default function Navbar() {
   const location = useLocation();
-  const { itemsInCart = [] } = useCart() || {};
+  const { itemsInCart = [], countItems } = useCart() || {};
 
   return (
     <nav data-testid="navbar" className={style.navbar__container}>
@@ -28,9 +28,9 @@ export default function Navbar() {
               className={`${style.cart__button} ${location.pathname === '/cart' ? style.active : ''}`}
             >
               Cart
-              {itemsInCart.length > 0 && (
+              {countItems(itemsInCart) > 0 && (
                 <span className={style.items__in__cart}>
-                  {itemsInCart ? '[' + itemsInCart.length + ']' : ''}
+                  {itemsInCart ? '[' + countItems(itemsInCart) + ']' : ''}
                 </span>
               )}
             </Link>

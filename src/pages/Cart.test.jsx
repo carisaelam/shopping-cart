@@ -29,9 +29,11 @@ describe('Cart Page', () => {
     useCart.mockReturnValue({
       addToCart: vi.fn(),
       removeFromCart: vi.fn(),
+      updateQuantity: vi.fn(),
+      countItems: vi.fn(),
       itemsInCart: [
-        { id: 1, title: 'Product 1', price: 10 },
-        { id: 2, title: 'Product 2', price: 20 },
+        { id: 1, title: 'Product 1', price: 10, quantity: 1 },
+        { id: 2, title: 'Product 2', price: 20, quantity: 1 },
       ],
     });
 
@@ -42,9 +44,12 @@ describe('Cart Page', () => {
   });
 
   it('should correctly show number of items in cart', () => {
+    const mockCountItems = vi.fn().mockReturnValue(2);
     useCart.mockReturnValue({
       addToCart: vi.fn(),
       removeFromCart: vi.fn(),
+      updateQuantity: vi.fn(),
+      countItems: mockCountItems,
       itemsInCart: [
         { id: 1, title: 'Product 1', price: 10, quantity: 1 },
         { id: 2, title: 'Product 2', price: 20, quantity: 1 },
@@ -58,9 +63,13 @@ describe('Cart Page', () => {
   });
 
   it('should show message when cart is empty', () => {
+    const mockCountItems = vi.fn().mockReturnValue(0);
+
     useCart.mockReturnValue({
       addToCart: vi.fn(),
       removeFromCart: vi.fn(),
+      updateQuantity: vi.fn(),
+      countItems: mockCountItems,
       itemsInCart: [],
     });
 

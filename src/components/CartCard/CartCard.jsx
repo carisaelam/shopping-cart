@@ -14,6 +14,7 @@ export default function CartCard({
   onQuantityChange,
 }) {
   const [currentQuantity, setCurrentQuantity] = useState(quantity);
+  const [quantityInputVisible, setQuantityInputVisible] = useState(false);
 
   useEffect(() => {
     console.log('updating qty in CartCard', quantity);
@@ -39,6 +40,10 @@ export default function CartCard({
     onQuantityChange?.(id, newQuantity);
   }
 
+  function toggleQuantityInput() {
+    setQuantityInputVisible(!quantityInputVisible);
+  }
+
   return (
     <div className={style.card__container}>
       <div className={style.image__container}>
@@ -53,8 +58,11 @@ export default function CartCard({
       </div>
       <div className={style.button__container}>
         <div className="quantity__container">
-          <label htmlFor="quantity">Qty: </label>
+          <label htmlFor="quantity">
+            Qty: {!quantityInputVisible && quantity}
+          </label>
           <input
+            hidden={!quantityInputVisible}
             className={style.quantity__input}
             name="quantity"
             type="number"
@@ -64,21 +72,22 @@ export default function CartCard({
             data-testid="product__quantity"
           ></input>
         </div>
+
         <button
           className={style.update__button}
-          onClick={handleRemoveFromCart}
+          onClick={toggleQuantityInput}
           data-testid="product__update__quantity"
         >
-          Update Quantity
+          {quantityInputVisible ? 'Done' : 'Update Quantity'}
         </button>
       </div>
       <button
-          className={style.remove__button}
-          onClick={handleRemoveFromCart}
-          data-testid="product__remove__from__cart"
-        >
-          Remove
-        </button>
+        className={style.remove__button}
+        onClick={handleRemoveFromCart}
+        data-testid="product__remove__from__cart"
+      >
+        Remove
+      </button>
     </div>
   );
 }

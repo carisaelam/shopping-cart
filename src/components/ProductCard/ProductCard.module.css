@@ -39,13 +39,6 @@
   padding: 0rem 1rem;
 }
 
-.quantity__container {
-  display: flex;
-}
-
-.quantity__label {
-}
-
 .quantity__input {
   max-width: 3rem;
 }
@@ -71,14 +64,14 @@
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   border: none;
-  background-color: dodgerblue;
+  background-color: hsl(3, 100%, 51%);
   box-shadow: 0 0 5px grey;
   color: white;
 }
 
 .remove__button:hover {
   cursor: pointer;
-  background-color: hsl(3, 100%, 41%);
+  background-color: hsl(3, 100%, 31%);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   transform: translateY(-2px);
   border-radius: 0.5rem;

@@ -41,9 +41,24 @@ export function CartProvider({ children }) {
     );
   }
 
+  function countItems(items) {
+    let count = 0;
+    items.forEach((item) => {
+      count += item.quantity;
+    });
+
+    return count;
+  }
+
   return (
     <CartContext.Provider
-      value={{ itemsInCart, addToCart, removeFromCart, updateQuantity }}
+      value={{
+        itemsInCart,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        countItems,
+      }}
     >
       {children}
     </CartContext.Provider>
