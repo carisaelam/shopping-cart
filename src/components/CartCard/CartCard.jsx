@@ -17,7 +17,6 @@ export default function CartCard({
   const [quantityInputVisible, setQuantityInputVisible] = useState(false);
 
   useEffect(() => {
-    console.log('updating qty in CartCard', quantity);
     setCurrentQuantity(quantity);
   }, [quantity]);
 

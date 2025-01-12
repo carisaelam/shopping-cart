@@ -7,14 +7,10 @@ export default function Cart() {
   const { itemsInCart, removeFromCart, updateQuantity, countItems } = useCart();
 
   function handleQuantityChange(id, newQuantity) {
-    console.log('handleQuantityChange firing for id: ', id);
     updateQuantity(id, newQuantity);
   }
 
- 
-  useEffect(() => {
-    console.log('Items in Cart:', itemsInCart);
-  }, [itemsInCart]);
+  useEffect(() => {}, [itemsInCart]);
 
   return (
     <div className={style.cart__container}>
