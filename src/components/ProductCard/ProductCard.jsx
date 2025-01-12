@@ -75,15 +75,20 @@ export default function ProductCard({
         </p>
       </div>
       <div className={style.button__container}>
-        <label htmlFor="quantity">Qty: </label>
-        <input
-          name="quantity"
-          type="number"
-          value={currentQuantity}
-          min="0"
-          onChange={(e) => updateQuantity(e)}
-          data-testid="product__quantity"
-        ></input>
+        <div className="quantity__container">
+          <label className={style.quantity__label} htmlFor="quantity">
+            Qty:{' '}
+          </label>
+          <input
+            className={style.quantity__input}
+            name="quantity"
+            type="number"
+            value={currentQuantity}
+            min="0"
+            onChange={(e) => updateQuantity(e)}
+            data-testid="product__quantity"
+          ></input>
+        </div>
         <button
           className={isInCart ? style.remove__button : style.add__button}
           onClick={handleButtonClick}
