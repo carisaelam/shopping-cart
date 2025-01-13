@@ -135,33 +135,5 @@ describe('Cart Page', () => {
     expect(mockUpdateQuantity).toHaveBeenCalledWith(1, 2);
   });
 
-  it('should display appropriate message when cart is empty', () => {
-    useCart.mockReturnValue({
-      itemsInCart: [],
-      countItems: vi.fn().mockReturnValue(0),
-      removeFromCart: vi.fn(),
-      updateQuantity: vi.fn(),
-    });
-
-    render(<RouterProvider router={router} />);
-    expect(screen.getByTestId('cart__message')).toHaveTextContent(
-      /you have 0 items in your cart/i
-    );
-  });
-
-  it('should render total cost of cart', () => {
-    useCart.mockReturnValue({
-      itemsInCart: [
-        { id: 1, title: 'Product 1', price: 10, quantity: 1 },
-        { id: 2, title: 'Product 2', price: 20, quantity: 1 },
-      ],
-      countItems: vi.fn().mockReturnValue(2),
-      removeFromCart: vi.fn(),
-      updateQuantity: vi.fn(),
-    });
-
-    render(<RouterProvider router={router} />);
-    const cartTotal = screen.getByTestId('cart__total');
-    expect(cartTotal).toHaveTextContent(/30/i);
-  });
+ 
 });

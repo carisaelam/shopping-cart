@@ -1,5 +1,6 @@
 import { useCart } from '../context/CartContext';
 import CartCard from '../components/CartCard/CartCard';
+import CartCalculations from '../components/CartCalculations/CartCalculations';
 import style from './Cart.module.css';
 import { useState, useEffect } from 'react';
 
@@ -27,26 +28,27 @@ export default function Cart() {
   }
 
   return (
-    <div className={style.cart__container}>
-      <div className={style.cart__heading__container}>
-        <h2>Your Cart</h2>
-        <p data-testid="cart__message">
-          You have {countItems(itemsInCart)} items in your cart
-        </p>
-        <p data-testid="cart__total">${cartTotal}</p>
+    <>
+      <div className={style.cart__container}>
+        <div className={style.cart__heading__container}>
+          <h2>Your Cart</h2>
+        </div>
+        <div className={style.cart__contents__container}>
+          {itemsInCart.map((item) => {
+            return (
+              <CartCard
+                key={item.id}
+                {...item}
+                onButtonClick={removeFromCart}
+                onQuantityChange={handleQuantityChange}
+              />
+            );
+          })}
+        </div>
       </div>
       <div>
-        {itemsInCart.map((item) => {
-          return (
-            <CartCard
-              key={item.id}
-              {...item}
-              onButtonClick={removeFromCart}
-              onQuantityChange={handleQuantityChange}
-            />
-          );
-        })}
+        <CartCalculations />
       </div>
-    </div>
+    </>
   );
 }

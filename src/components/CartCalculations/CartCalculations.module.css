@@ -1,0 +1,10 @@
+.cart__calculations {
+  color: pink;
+  min-height: 10rem;
+  background-color: steelblue;
+  position: fixed;
+  bottom: 0;
+  min-width: 100%;
+  margin: 0;
+  padding: 0;
+}
