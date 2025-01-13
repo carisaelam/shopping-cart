@@ -34,7 +34,7 @@ export default function CartCard({
   }
 
   function updateQuantity(e) {
-    const newQuantity = Math.max(0, parseInt(e.target.value));
+    const newQuantity = Math.max(0, parseInt(e.target.value)) || 0;
     setCurrentQuantity(newQuantity);
     onQuantityChange?.(id, newQuantity);
   }

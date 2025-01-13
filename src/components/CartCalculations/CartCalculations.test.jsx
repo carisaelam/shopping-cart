@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { describe, it, expect, vi } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { RouterProvider } from 'react-router-dom';
@@ -52,7 +53,7 @@ describe('Cart Calculations component', () => {
     );
   });
 
-  it('should render total cost of cart', () => {
+  it('should render cost of items in cart', () => {
     useCart.mockReturnValue({
       itemsInCart: [
         { id: 1, title: 'Product 1', price: 10, quantity: 1 },
@@ -64,7 +65,55 @@ describe('Cart Calculations component', () => {
     });
 
     render(<RouterProvider router={router} />);
-    const cartTotal = screen.getByTestId('cart__total');
-    expect(cartTotal).toHaveTextContent(/30/i);
+    const itemsTotal = screen.getByTestId('items__total');
+    expect(itemsTotal).toHaveTextContent(/30/i);
+  });
+
+  it('should render the tax cost', () => {
+    useCart.mockReturnValue({
+      itemsInCart: [
+        { id: 1, title: 'Product 1', price: 10, quantity: 1 },
+        { id: 2, title: 'Product 2', price: 20, quantity: 1 },
+      ],
+      countItems: vi.fn().mockReturnValue(2),
+      removeFromCart: vi.fn(),
+      updateQuantity: vi.fn(),
+    });
+
+    render(<RouterProvider router={router} />);
+    const tax = screen.getByTestId('tax');
+    expect(tax).toHaveTextContent(/2.1/i);
+  });
+
+  it('should render the shipping and handling cost', () => {
+    useCart.mockReturnValue({
+      itemsInCart: [
+        { id: 1, title: 'Product 1', price: 10, quantity: 1 },
+        { id: 2, title: 'Product 2', price: 20, quantity: 1 },
+      ],
+      countItems: vi.fn().mockReturnValue(2),
+      removeFromCart: vi.fn(),
+      updateQuantity: vi.fn(),
+    });
+
+    render(<RouterProvider router={router} />);
+    const shippingAndHandling = screen.getByTestId('shipping__and__handling');
+    expect(shippingAndHandling).toHaveTextContent(/0.9/i);
+  });
+
+  it('should render the total cost', () => {
+    useCart.mockReturnValue({
+      itemsInCart: [
+        { id: 1, title: 'Product 1', price: 10, quantity: 1 },
+        { id: 2, title: 'Product 2', price: 20, quantity: 1 },
+      ],
+      countItems: vi.fn().mockReturnValue(2),
+      removeFromCart: vi.fn(),
+      updateQuantity: vi.fn(),
+    });
+
+    render(<RouterProvider router={router} />);
+    const grandTotal = screen.getByTestId('grand__total');
+    expect(grandTotal).toHaveTextContent(/33/i);
   });
 });
