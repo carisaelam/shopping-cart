@@ -118,7 +118,7 @@ export default function ProductCard({
             isInCart ? 'product__remove__from__cart' : 'product__add__to__cart'
           }
         >
-          {isInCart ? 'Remove from Cart' : 'Add to Cart'}
+          {isInCart ? 'Remove' : 'Add to Cart'}
         </button>
       </div>
     </div>

@@ -1,12 +1,17 @@
 .cart__calculations {
-  color: pink;
+  color: white;
+  font-weight: bold;
   min-height: 10rem;
   background-color: steelblue;
   position: fixed;
   bottom: 0;
   min-width: 100%;
   margin: 0;
-  padding: 0;
+}
+
+.cart__message {
+  padding: 1rem;
+  font-size: clamp(.75rem, .75rem + 2vw, 1.25rem);
 }
 
 .calculations__table {

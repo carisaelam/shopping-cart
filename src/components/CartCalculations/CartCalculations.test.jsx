@@ -69,6 +69,37 @@ describe('Cart Calculations component', () => {
     expect(itemsTotal).toHaveTextContent(/30/i);
   });
 
+  // Rounding
+  it('should round cost to two decimal places', () => {
+    useCart.mockReturnValue({
+      itemsInCart: [
+        { id: 1, title: 'Product 1', price: 10.5555, quantity: 1 },
+        { id: 2, title: 'Product 2', price: 20, quantity: 1 },
+      ],
+      countItems: vi.fn().mockReturnValue(2),
+      removeFromCart: vi.fn(),
+      updateQuantity: vi.fn(),
+    });
+
+    render(<RouterProvider router={router} />);
+    const itemsTotal = screen.getByTestId('items__total');
+    expect(itemsTotal).toHaveTextContent(/30.56/i);
+  });
+
+  it('should round to two even with tiny prices', () => {
+    useCart.mockReturnValue({
+      itemsInCart: [{ id: 1, title: 'Product 1', price: 0.01, quantity: 1 }],
+      countItems: vi.fn().mockReturnValue(2),
+      removeFromCart: vi.fn(),
+      updateQuantity: vi.fn(),
+    });
+
+    render(<RouterProvider router={router} />);
+    const itemsTotal = screen.getByTestId('items__total');
+    expect(itemsTotal).toHaveTextContent(/0.01/i);
+  });
+
+  // Calculations
   it('should render the tax cost', () => {
     useCart.mockReturnValue({
       itemsInCart: [
@@ -101,6 +132,25 @@ describe('Cart Calculations component', () => {
     expect(shippingAndHandling).toHaveTextContent(/0.9/i);
   });
 
+  it('should render zeroes for costs when cart is empty', () => {
+    useCart.mockReturnValue({
+      itemsInCart: [],
+      countItems: vi.fn().mockReturnValue(0),
+      removeFromCart: vi.fn(),
+      updateQuantity: vi.fn(),
+    });
+
+    render(<RouterProvider router={router} />);
+    const itemsTotal = screen.getByTestId('items__total');
+    const grandTotal = screen.getByTestId('grand__total');
+    const tax = screen.getByTestId('tax');
+    const shippingAndHandling = screen.getByTestId('shipping__and__handling');
+    expect(itemsTotal).toHaveTextContent(/0/i);
+    expect(grandTotal).toHaveTextContent(/0/i);
+    expect(tax).toHaveTextContent(/0/i);
+    expect(shippingAndHandling).toHaveTextContent(/0/i);
+  });
+
   it('should render the total cost', () => {
     useCart.mockReturnValue({
       itemsInCart: [
@@ -115,5 +165,91 @@ describe('Cart Calculations component', () => {
     render(<RouterProvider router={router} />);
     const grandTotal = screen.getByTestId('grand__total');
     expect(grandTotal).toHaveTextContent(/33/i);
+  });
+
+  it('should render correct cost for large quantities', () => {
+    useCart.mockReturnValue({
+      itemsInCart: [
+        { id: 1, title: 'Product 1', price: 10, quantity: 100000000 },
+        { id: 2, title: 'Product 2', price: 20, quantity: 100000000 },
+      ],
+      countItems: vi.fn().mockReturnValue(2),
+      removeFromCart: vi.fn(),
+      updateQuantity: vi.fn(),
+    });
+
+    render(<RouterProvider router={router} />);
+    const grandTotal = screen.getByTestId('grand__total');
+    expect(grandTotal).toHaveTextContent(/3300000000.00/i);
+  });
+
+  // Updating costs
+  it('should update total cost when item is removed', async () => {
+    let mockCart = {
+      itemsInCart: [
+        { id: 1, title: 'Product 1', price: 10, quantity: 1 },
+        { id: 2, title: 'Product 2', price: 20, quantity: 1 },
+      ],
+      countItems: vi.fn().mockReturnValue(2),
+      removeFromCart: vi.fn(),
+      updateQuantity: vi.fn(),
+    };
+
+    const useCartMock = vi.fn(() => mockCart);
+    useCart.mockImplementation(useCartMock);
+
+    const { rerender } = render(<CartCalculations />);
+
+    let grandTotal = screen.getByTestId('grand__total');
+    expect(grandTotal).toHaveTextContent(/33.00/);
+
+    mockCart = {
+      ...mockCart,
+      itemsInCart: [{ id: 1, title: 'Product 1', price: 10, quantity: 1 }],
+      countItems: vi.fn().mockReturnValue(1),
+    };
+
+    useCartMock.mockReturnValue(mockCart);
+
+    rerender(<CartCalculations />);
+
+    grandTotal = screen.getByTestId('grand__total');
+    expect(grandTotal).toHaveTextContent(/11.00/);
+  });
+
+  it('should update total cost when quantity is changed', async () => {
+    let mockCart = {
+      itemsInCart: [
+        { id: 1, title: 'Product 1', price: 10, quantity: 1 },
+        { id: 2, title: 'Product 2', price: 20, quantity: 1 },
+      ],
+      countItems: vi.fn().mockReturnValue(2),
+      removeFromCart: vi.fn(),
+      updateQuantity: vi.fn(),
+    };
+
+    const useCartMock = vi.fn(() => mockCart);
+    useCart.mockImplementation(useCartMock);
+
+    const { rerender } = render(<CartCalculations />);
+
+    let grandTotal = screen.getByTestId('grand__total');
+    expect(grandTotal).toHaveTextContent(/33.00/);
+
+    mockCart = {
+      ...mockCart,
+      itemsInCart: [
+        { id: 1, title: 'Product 1', price: 10, quantity: 2 },
+        { id: 2, title: 'Product 2', price: 20, quantity: 1 },
+      ],
+      countItems: vi.fn().mockReturnValue(1),
+    };
+
+    useCartMock.mockReturnValue(mockCart);
+
+    rerender(<CartCalculations />);
+
+    grandTotal = screen.getByTestId('grand__total');
+    expect(grandTotal).toHaveTextContent(/44.00/);
   });
 });

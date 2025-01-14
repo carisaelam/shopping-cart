@@ -13,7 +13,8 @@ export default function CartCalculations() {
 
   const TAX = itemsTotalValue * 0.07 || 0;
   const SHIPPING__AND__HANDLING = itemsTotalValue * 0.03 || 0;
-  const GRAND__TOTAL = Number(itemsTotalValue) + TAX + SHIPPING__AND__HANDLING || 0;
+  const GRAND__TOTAL =
+    Number(itemsTotalValue) + TAX + SHIPPING__AND__HANDLING || 0;
 
   useEffect(() => {
     setItemsTotal(calculateCartTotal(itemsInCart));
@@ -30,10 +31,9 @@ export default function CartCalculations() {
   }
   return (
     <div data-testid="cart__calculations" className={style.cart__calculations}>
-      Cart Calculations Area
-      <p data-testid="cart__message">
-        You have {countItems(itemsInCart) || 0} item(s) in your cart
-      </p>
+      <div data-testid="cart__message" className={style.cart__message}>
+        <p>You have {countItems(itemsInCart) || 0} item(s) in your cart</p>
+      </div>
       <div className={style.calculations__table}>
         <div data-testid="items__total" className={style.items__total}>
           <p>Subtotal: </p>
