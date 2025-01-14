@@ -4,6 +4,14 @@
   color: #36454f;
   padding: 1rem;
   box-sizing: border-box;
+  margin-bottom: 10rem;
+}
+
+.cart__contents__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
+  place-content: center;
+  justify-items: center;
 }
 
 .cart__heading__container {
